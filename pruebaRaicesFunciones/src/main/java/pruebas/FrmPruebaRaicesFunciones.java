@@ -20,15 +20,11 @@ public class FrmPruebaRaicesFunciones extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lblMetodo = new javax.swing.JLabel();
         cmbMetodo = new javax.swing.JComboBox<>();
-        lblXi = new javax.swing.JLabel();
-        txtXi = new javax.swing.JTextField();
-        txtXf = new javax.swing.JTextField();
-        lblXf = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtEamax = new javax.swing.JTextField();
         btnCalcular = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtResultado = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaIteraciones = new javax.swing.JTable();
+        lblFuncion = new javax.swing.JLabel();
+        cmbFuncion = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,36 +42,6 @@ public class FrmPruebaRaicesFunciones extends javax.swing.JFrame {
             }
         });
 
-        lblXi.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblXi.setText("Xi");
-
-        txtXi.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtXi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtXiActionPerformed(evt);
-            }
-        });
-
-        txtXf.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtXf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtXfActionPerformed(evt);
-            }
-        });
-
-        lblXf.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblXf.setText("Xf");
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("Error Max (ea):");
-
-        txtEamax.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtEamax.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEamaxActionPerformed(evt);
-            }
-        });
-
         btnCalcular.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCalcular.setText("Calcular");
         btnCalcular.addActionListener(new java.awt.event.ActionListener() {
@@ -84,49 +50,59 @@ public class FrmPruebaRaicesFunciones extends javax.swing.JFrame {
             }
         });
 
-        txtResultado.setColumns(20);
-        txtResultado.setRows(5);
-        jScrollPane1.setViewportView(txtResultado);
+        tablaIteraciones.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Iteracion", "xi", "xf", "xr ", "f(xi)", "f(xf)", "f(xr)", "Error Aproximado"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tablaIteraciones);
+
+        lblFuncion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblFuncion.setText("Funcion");
+
+        cmbFuncion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        cmbFuncion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "f(x) = 4x³ - 6x² + 7x - 2.3", "g(x) = x²√|cos(x)| - 5" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblMetodo)
-                .addGap(18, 18, 18)
-                .addComponent(cmbMetodo, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(329, 329, 329))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(192, 192, 192)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(162, 162, 162)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(lblXf, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(txtXf, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(lblXi, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(txtXi, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(43, 43, 43)
-                                        .addComponent(txtEamax, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(jScrollPane1)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(264, 264, 264)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(360, 360, 360)
-                        .addComponent(btnCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(203, Short.MAX_VALUE))
+                        .addComponent(btnCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 847, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(15, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblMetodo)
+                    .addComponent(lblFuncion))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbMetodo, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(218, 218, 218))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,23 +113,15 @@ public class FrmPruebaRaicesFunciones extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMetodo)
                     .addComponent(cmbMetodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(65, 65, 65)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblXi)
-                    .addComponent(txtXi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblXf)
-                    .addComponent(txtXf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtEamax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(lblFuncion)
+                    .addComponent(cmbFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(71, 71, 71)
                 .addComponent(btnCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -174,91 +142,72 @@ public class FrmPruebaRaicesFunciones extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbMetodoActionPerformed
 
-    private void txtXiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtXiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtXiActionPerformed
-
-    private void txtXfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtXfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtXfActionPerformed
-
-    private void txtEamaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEamaxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEamaxActionPerformed
-
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
-                                           
-    try {
-    // se leen los valores que el usuario escribio en las cajas de texto
-    double xi = Double.parseDouble(txtXi.getText());
-    double xf = Double.parseDouble(txtXf.getText());
-    double eamax = Double.parseDouble(txtEamax.getText());
-
-    // se crea una instancia de la clase que tiene los metodos numericos
+     try {
+    // se crea una instancia de la clase con los metodos numericos
     implementaciones.RaicesFunciones rf = new implementaciones.RaicesFunciones();
 
-    // se definen las funciones de la tarea
-    // f(x) para el metodo de Biseccion
+    // se definen las dos funciones de la tarea
     java.util.function.DoubleUnaryOperator f = (x) -> 4*Math.pow(x,3) - 6*Math.pow(x,2) + 7*x - 2.3;
-    // g(x) para el metodo de la Regla Falsa
     java.util.function.DoubleUnaryOperator g = (x) -> Math.pow(x,2) * Math.sqrt(Math.abs(Math.cos(x))) - 5;
 
-    // se obtiene el metodo que el usuario selecciono en la lista
+    // se obtiene lo que el usuario selecciono en los combos
+    String funcion = (String)cmbFuncion.getSelectedItem();
     String metodo = (String)cmbMetodo.getSelectedItem();
-    double raiz = 0;
-    double valorFuncion = 0;
 
-  
-    // Metodo de Biseccion
+    // se inicializan valores por defecto para los intervalos y el error
+    double xi = 0, xf = 0, eamax = 0.0001;  
+    java.util.List<Object[]> resultados = null;
 
-    if (metodo.equals("Biseccion")) {
-        double fxi = f.applyAsDouble(xi);
-        double fxf = f.applyAsDouble(xf);
+    // se define el modelo de la tabla con los nombres de columnas
+    javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel(
+        new Object[]{"Iteracion", "Xi", "Xf", "Xr", "f(Xi)", "f(Xf)", "f(Xr)", "Error"}, 0);
 
-        // se valida que el intervalo sea correcto (cambian de signo)
-        if (fxi * fxf > 0) {
-            JOptionPane.showMessageDialog(this,
-                "El intervalo no es valido: f(xi) y f(xf) tienen el mismo signo");
-            return;
-        }
-
-        // se llama al metodo biseccion
-        raiz = rf.biseccion(f, xi, xf, eamax);
-        // se calcula el valor de la funcion en la raiz
-        valorFuncion = f.applyAsDouble(raiz);
-    } 
-
-    // Metodo de la Regla Falsa
-
-    else if (metodo.equals("Regla Falsa")) {
-        double fxi = g.applyAsDouble(xi);
-        double fxf = g.applyAsDouble(xf);
-
-        // se valida que el intervalo sea correcto (cambian de signo)
-        if (fxi * fxf > 0) {
-            JOptionPane.showMessageDialog(this,
-                "El intervalo no es valido: g(xi) y g(xf) tienen el mismo signo");
-            return;
-        }
-
-        // se llama al metodo regla falsa
-        raiz = rf.reglaFalsa(g, xi, xf, eamax);
-        // se calcula el valor de la funcion en la raiz
-        valorFuncion = g.applyAsDouble(raiz);
+    // Metodo biseccion
+    if (metodo.equals("Biseccion") && funcion.startsWith("f(x)")) {
+        // para la funcion f(x) se usa el intervalo [0,1]
+        xi = 0.0; 
+        xf = 1.0;
+        resultados = rf.biseccionTabla(f, xi, xf, eamax);
+    }
+    else if (metodo.equals("Biseccion") && funcion.startsWith("g(x)")) {
+        // para la funcion g(x) se usa el intervalo [-3,-2]
+        xi = -3.0; 
+        xf = -2.0;
+        resultados = rf.biseccionTabla(g, xi, xf, eamax);
     }
 
-    // se muestran los resultados en el cuadro de texto
-    // los valores se imprimen con 6 decimales fijos
-    txtResultado.setText(String.format(
-        "Metodo: %s\nRaiz: %.6f\nf(raiz): %.6f\nIteraciones: %d",
-        metodo, raiz, valorFuncion, rf.getIteraciones()
-    ));
+    // Metodo regla falsa
+    else if (metodo.equals("Regla Falsa") && funcion.startsWith("f(x)")) {
+        // para la funcion f(x) se usa el intervalo [0,1]
+        xi = 0.0; 
+        xf = 1.0;
+        resultados = rf.reglaFalsaTabla(f, xi, xf, eamax);
+    }
+    else if (metodo.equals("Regla Falsa") && funcion.startsWith("g(x)")) {
+        // para la funcion g(x) se usa el intervalo [2,3]
+        xi = 2.0; 
+        xf = 3.0;
+        resultados = rf.reglaFalsaTabla(g, xi, xf, eamax);
+    }
+
+    // se llena la tabla con los datos obtenidos en la lista de resultados
+    if (resultados != null) {
+        for (Object[] fila : resultados) {
+            model.addRow(fila);
+        }
+        tablaIteraciones.setModel(model);
+    } else {
+        // si no hay resultados se muestra un mensaje
+        JOptionPane.showMessageDialog(this, "No se pudieron calcular las iteraciones.");
+    }
 
 } catch (Exception ex) {
-    // si ocurre un error al  calcular se muestra un mensaje
+    // si ocurre algun error durante el calculo se avisa al usuario
     JOptionPane.showMessageDialog(this, 
-        "Error en los datos ingresados. Verifique que sean numeros validos.");
+        "Error en el calculo: " + ex.getMessage());
 }
+
 
 
     }//GEN-LAST:event_btnCalcularActionPerformed
@@ -300,17 +249,13 @@ public class FrmPruebaRaicesFunciones extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCalcular;
+    private javax.swing.JComboBox<String> cmbFuncion;
     private javax.swing.JComboBox<String> cmbMetodo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblFuncion;
     private javax.swing.JLabel lblMetodo;
-    private javax.swing.JLabel lblXf;
-    private javax.swing.JLabel lblXi;
-    private javax.swing.JTextField txtEamax;
-    private javax.swing.JTextArea txtResultado;
-    private javax.swing.JTextField txtXf;
-    private javax.swing.JTextField txtXi;
+    private javax.swing.JTable tablaIteraciones;
     // End of variables declaration//GEN-END:variables
 }
