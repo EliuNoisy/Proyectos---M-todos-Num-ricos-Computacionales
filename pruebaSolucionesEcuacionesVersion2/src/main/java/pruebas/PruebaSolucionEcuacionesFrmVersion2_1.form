@@ -29,7 +29,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
+          <Component id="jScrollPane2" alignment="0" pref="764" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -66,27 +66,29 @@
                               <Component id="pnlMatriz" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="347" max="-2" attributes="0"/>
+                              <Component id="btnResolver" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                              <Component id="btnLimpiar" min="-2" pref="152" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="320" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="lblErrorMax" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblMetodo" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lblMetodo" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                      <Component id="cmbMetodo" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                                      <Component id="btnResolver" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                                      <Component id="btnLimpiar" min="-2" pref="152" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="cmbMetodo" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtErrorMax" min="-2" pref="94" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="185" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="187" max="-2" attributes="0"/>
                               <Component id="scrollResultado" min="-2" pref="760" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="193" max="32767" attributes="0"/>
+                      <EmptySpace pref="191" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -110,13 +112,22 @@
                           <Component id="lblMetodo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cmbMetodo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lblErrorMax" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="txtErrorMax" max="32767" attributes="0"/>
+                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnResolver" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="btnLimpiar" alignment="3" max="32767" attributes="0"/>
+                          <Component id="btnLimpiar" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="scrollResultado" min="-2" pref="207" max="-2" attributes="0"/>
+                      <EmptySpace pref="37" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -199,10 +210,11 @@
                   <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
+                  <StringArray count="4">
                     <StringItem index="0" value="Eliminacion de Gauss"/>
                     <StringItem index="1" value="Gauss-Jordan"/>
                     <StringItem index="2" value="Inversion de Matriz"/>
+                    <StringItem index="3" value="Gauss-Seidel"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -233,6 +245,21 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JLabel" name="lblErrorMax">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="18" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Error maximo (%):"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtErrorMax">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="18" style="1"/>
+                </Property>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>

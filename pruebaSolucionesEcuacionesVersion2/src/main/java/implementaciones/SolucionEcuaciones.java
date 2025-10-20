@@ -2,7 +2,7 @@ package implementaciones;
 
 /**
  * Clase que implementa metodos numericos para resolver sistemas de ecuaciones
- * Metodos: Eliminacion de Gauss y Gauss-Jordan con pivoteo parcial
+ * Metodos: Eliminacion de Gauss, Gauss-Jordan, Inversion de Matriz y Gauss-Seidel
  */
 public class SolucionEcuaciones {
     
@@ -163,71 +163,6 @@ public class SolucionEcuaciones {
     }
     
 
-    // Metodos auxiliares
-
-    
-    /**
-     * Muestra la matriz ampliada con 6 decimales
-     * @param a Matriz ampliada
-     * @return Texto con la matriz formateada
-     */
-    public String despliegaMatrizAmpliada(double[][] a) {
-        StringBuilder sb = new StringBuilder();
-        int n = a.length;
-        
-        sb.append("Matriz Ampliada:\n");
-        for (int i = 0; i < n; i++) {
-            sb.append("[ ");
-            for (int j = 0; j <= n; j++) {
-                if (j == n) {
-                    sb.append("| ");
-                }
-                sb.append(String.format("%10.6f ", a[i][j]));
-            }
-            sb.append("]\n");
-        }
-        sb.append("\n");
-        
-        return sb.toString();
-    }
-    
-    /**
-     * Muestra la solucion del sistema con 6 decimales
-     * @param x Arreglo con la solucion
-     * @return Texto con la solucion formateada
-     */
-    public String despliegaSolucion(double[] x) {
-        StringBuilder sb = new StringBuilder();
-        
-        sb.append("Solucion del sistema:\n");
-        for (int i = 0; i < x.length; i++) {
-            sb.append(String.format("x%d = %10.6f\n", (i + 1), x[i]));
-        }
-        sb.append("\n");
-        
-        return sb.toString();
-    }
-    
-    /**
-     * Crea una copia de la matriz para no modificar la original
-     * @param original Matriz a copiar
-     * @return Copia de la matriz
-     */
-    public double[][] copiarMatriz(double[][] original) {
-        int filas = original.length;
-        int columnas = original[0].length;
-        double[][] copia = new double[filas][columnas];
-        
-        for (int i = 0; i < filas; i++) {
-            for (int j = 0; j < columnas; j++) {
-                copia[i][j] = original[i][j];
-            }
-        }
-        
-        return copia;
-    }
-    
-    
     // metodo 3: inversion de matriz con gauss-jordan
     
     
@@ -338,6 +273,161 @@ public class SolucionEcuaciones {
         }
     }
     
+
+    // metodo 4: gauss-seidel (metodo iterativo)
+
+    
+    /**
+     * Resuelve un sistema de ecuaciones usando el metodo iterativo de Gauss-Seidel
+     * @param a Matriz ampliada del sistema de ecuaciones
+     * @param eaMax Error aproximado maximo permitido (criterio de convergencia) en porcentaje
+     * @return Objeto ResultadoGaussSeidel con la solucion, numero de iteraciones y estado de convergencia
+     */
+    public ResultadoGaussSeidel gaussSeidel(double[][] a, double eaMax) {
+        int n = a.length;
+        double[] x = new double[n];
+        double[] xAnterior = new double[n];
+        double[] errores = new double[n];
+        int iteraciones = 0;
+        int maxIteraciones = 1000;
+        boolean converge = false;
+        
+        // Valores iniciales en cero
+        for (int i = 0; i < n; i++) {
+            x[i] = 0.0;
+        }
+        
+        // Proceso iterativo
+        while (iteraciones < maxIteraciones && !converge) {
+            iteraciones++;
+            
+            // Guardar valores anteriores
+            for (int i = 0; i < n; i++) {
+                xAnterior[i] = x[i];
+            }
+            
+            // Calcular nuevos valores usando la formula de Gauss-Seidel
+            for (int i = 0; i < n; i++) {
+                double suma = a[i][n]; // termino independiente
+                
+                // Sumar los terminos con los valores actualizados y anteriores
+                for (int j = 0; j < n; j++) {
+                    if (j != i) {
+                        suma -= a[i][j] * x[j];
+                    }
+                }
+                
+                // Calcular el nuevo valor de x[i]
+                x[i] = suma / a[i][i];
+            }
+            
+            // Calcular errores aproximados relativos porcentuales
+            converge = true;
+            for (int i = 0; i < n; i++) {
+                if (x[i] != 0) {
+                    errores[i] = Math.abs((x[i] - xAnterior[i]) / x[i]) * 100;
+                    if (errores[i] > eaMax) {
+                        converge = false;
+                    }
+                } else {
+                    // Si x[i] es cero, verificar si el cambio es significativo
+                    if (Math.abs(x[i] - xAnterior[i]) > eaMax / 100) {
+                        converge = false;
+                    }
+                }
+            }
+        }
+        
+        return new ResultadoGaussSeidel(x, iteraciones, converge);
+    }
+    
+    /**
+     * Clase interna para almacenar el resultado del metodo de Gauss-Seidel
+     */
+    public class ResultadoGaussSeidel {
+        public double[] solucion;
+        public int iteraciones;
+        public boolean convergio;
+        
+        /**
+         * Constructor
+         * @param solucion Arreglo con los valores de las variables
+         * @param iteraciones Numero de iteraciones realizadas
+         * @param convergio Indica si el metodo convergio
+         */
+        public ResultadoGaussSeidel(double[] solucion, int iteraciones, boolean convergio) {
+            this.solucion = solucion;
+            this.iteraciones = iteraciones;
+            this.convergio = convergio;
+        }
+    }
+    
+
+    // Metodos auxiliares
+
+    
+    /**
+     * Muestra la matriz ampliada con 6 decimales
+     * @param a Matriz ampliada
+     * @return Texto con la matriz formateada
+     */
+    public String despliegaMatrizAmpliada(double[][] a) {
+        StringBuilder sb = new StringBuilder();
+        int n = a.length;
+        
+        sb.append("Matriz Ampliada:\n");
+        for (int i = 0; i < n; i++) {
+            sb.append("[ ");
+            for (int j = 0; j <= n; j++) {
+                if (j == n) {
+                    sb.append("| ");
+                }
+                sb.append(String.format("%10.6f ", a[i][j]));
+            }
+            sb.append("]\n");
+        }
+        sb.append("\n");
+        
+        return sb.toString();
+    }
+    
+    /**
+     * Muestra la solucion del sistema con 6 decimales
+     * @param x Arreglo con la solucion
+     * @return Texto con la solucion formateada
+     */
+    public String despliegaSolucion(double[] x) {
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append("Solucion del sistema:\n");
+        for (int i = 0; i < x.length; i++) {
+            sb.append(String.format("x%d = %10.6f\n", (i + 1), x[i]));
+        }
+        sb.append("\n");
+        
+        return sb.toString();
+    }
+    
+    /**
+     * Muestra la solucion de Gauss-Seidel con informacion de iteraciones
+     * @param resultado Objeto ResultadoGaussSeidel con la solucion
+     * @return Texto con la solucion formateada
+     */
+    public String despliegaSolucionGaussSeidel(ResultadoGaussSeidel resultado) {
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append("Numero de iteraciones: ").append(resultado.iteraciones).append("\n");
+        sb.append("Convergio: ").append(resultado.convergio ? "Si" : "No").append("\n\n");
+        sb.append("Solucion del sistema:\n");
+        
+        for (int i = 0; i < resultado.solucion.length; i++) {
+            sb.append(String.format("x%d = %10.6f\n", (i + 1), resultado.solucion[i]));
+        }
+        sb.append("\n");
+        
+        return sb.toString();
+    }
+    
     /**
      * Muestra una matriz cuadrada con 6 decimales
      * @param a Matriz a desplegar
@@ -357,5 +447,52 @@ public class SolucionEcuaciones {
         sb.append("\n");
         
         return sb.toString();
+    }
+    
+    /**
+     * Crea una copia de la matriz para no modificar la original
+     * @param original Matriz a copiar
+     * @return Copia de la matriz
+     */
+    public double[][] copiarMatriz(double[][] original) {
+        int filas = original.length;
+        int columnas = original[0].length;
+        double[][] copia = new double[filas][columnas];
+        
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                copia[i][j] = original[i][j];
+            }
+        }
+        
+        return copia;
+    }
+    
+    /**
+     * Verifica si la matriz es diagonalmente dominante
+     * @param a Matriz ampliada del sistema
+     * @return true si es diagonalmente dominante, false en caso contrario
+     */
+    public boolean esDiagonalmenteDominante(double[][] a) {
+        int n = a.length;
+        
+        for (int i = 0; i < n; i++) {
+            double diagonal = Math.abs(a[i][i]);
+            double suma = 0.0;
+            
+            // Sumar los valores absolutos de los demas elementos de la fila
+            for (int j = 0; j < n; j++) {
+                if (i != j) {
+                    suma += Math.abs(a[i][j]);
+                }
+            }
+            
+            // Si el elemento diagonal no es mayor, no es diagonalmente dominante
+            if (diagonal <= suma) {
+                return false;
+            }
+        }
+        
+        return true;
     }
 }

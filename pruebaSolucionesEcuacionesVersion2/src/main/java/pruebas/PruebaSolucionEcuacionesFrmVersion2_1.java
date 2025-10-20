@@ -20,6 +20,9 @@ public class PruebaSolucionEcuacionesFrmVersion2_1 extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         solucion = new SolucionEcuaciones();
+        
+        txtErrorMax.setText("0.01");
+
 
     }
     
@@ -239,6 +242,8 @@ public class PruebaSolucionEcuacionesFrmVersion2_1 extends javax.swing.JFrame {
         btnResolver = new javax.swing.JButton();
         scrollResultado = new javax.swing.JScrollPane();
         txtResultado = new javax.swing.JTextArea();
+        lblErrorMax = new javax.swing.JLabel();
+        txtErrorMax = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -283,7 +288,7 @@ public class PruebaSolucionEcuacionesFrmVersion2_1 extends javax.swing.JFrame {
         });
 
         cmbMetodo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cmbMetodo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Eliminacion de Gauss", "Gauss-Jordan", "Inversion de Matriz" }));
+        cmbMetodo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Eliminacion de Gauss", "Gauss-Jordan", "Inversion de Matriz", "Gauss-Seidel" }));
 
         btnResolver.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnResolver.setText("Resolver Sistema");
@@ -296,6 +301,11 @@ public class PruebaSolucionEcuacionesFrmVersion2_1 extends javax.swing.JFrame {
         txtResultado.setColumns(20);
         txtResultado.setRows(5);
         scrollResultado.setViewportView(txtResultado);
+
+        lblErrorMax.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblErrorMax.setText("Error maximo (%):");
+
+        txtErrorMax.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -319,21 +329,23 @@ public class PruebaSolucionEcuacionesFrmVersion2_1 extends javax.swing.JFrame {
                         .addGap(243, 243, 243)
                         .addComponent(pnlMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(320, 320, 320)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(lblMetodo)
-                                .addGap(27, 27, 27)
-                                .addComponent(cmbMetodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(btnResolver)
-                                .addGap(50, 50, 50)
-                                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(347, 347, 347)
+                        .addComponent(btnResolver)
+                        .addGap(49, 49, 49)
+                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(185, 185, 185)
+                        .addGap(320, 320, 320)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblErrorMax)
+                            .addComponent(lblMetodo))
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbMetodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtErrorMax, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(187, 187, 187)
                         .addComponent(scrollResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,12 +364,19 @@ public class PruebaSolucionEcuacionesFrmVersion2_1 extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMetodo)
                     .addComponent(cmbMetodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblErrorMax)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(txtErrorMax)
+                        .addGap(1, 1, 1)))
+                .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnResolver, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(14, 14, 14)
-                .addComponent(scrollResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jScrollPane2.setViewportView(jPanel2);
@@ -370,7 +389,7 @@ public class PruebaSolucionEcuacionesFrmVersion2_1 extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
         );
 
         pack();
@@ -434,69 +453,147 @@ public class PruebaSolucionEcuacionesFrmVersion2_1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnResolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResolverActionPerformed
-        // Verificar que la matriz haya sido creada
-        // Verificar que la matriz haya sido creada
-        if (tamanioActual == 0) {
-            JOptionPane.showMessageDialog(this,
-                "Primero debe crear la matriz",
-                "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
+      if (tamanioActual == 0) {
+    JOptionPane.showMessageDialog(this,
+        "Primero debe crear la matriz",
+        "Advertencia", JOptionPane.WARNING_MESSAGE);
+    return;
+}
+
+String metodo = (String) cmbMetodo.getSelectedItem();
+
+// Si se selecciono "Inversion de Matriz"
+if (metodo.equals("Inversion de Matriz")) {
+    invertirMatriz();
+    return;
+}
+
+// Leer la matriz del sistema
+int n = tamanioActual;
+double[][] matrizOriginal = new double[n][n + 1];
+
+try {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j <= n; j++) {
+            String texto = txtMatriz[i][j].getText().trim();
+            matrizOriginal[i][j] = Double.parseDouble(texto);
         }
+    }
+} catch (NumberFormatException ex) {
+    JOptionPane.showMessageDialog(this,
+        "Error: Ingrese solo valores numericos validos",
+        "Error de formato", JOptionPane.ERROR_MESSAGE);
+    return;
+}
 
-        String metodo = (String) cmbMetodo.getSelectedItem();
+double[][] matriz = solucion.copiarMatriz(matrizOriginal);
 
-        // Si se seleccionó "Inversion de Matriz"
-        if (metodo.equals("Inversion de Matriz")) {
-            invertirMatriz();
-            return;
-        }
+txtResultado.setText("");
+txtResultado.append("=== SISTEMA DE ECUACIONES ===\n\n");
+txtResultado.append(solucion.despliegaMatrizAmpliada(matrizOriginal));
 
-        // Para los otros métodos (Gauss y Gauss-Jordan)
-        int n = tamanioActual;
-        double[][] matrizOriginal = new double[n][n + 1];
-
+try {
+    if (metodo.equals("Gauss-Seidel")) {
+        // Leer el error maximo
+        double eaMax;
         try {
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j <= n; j++) {
-                    String texto = txtMatriz[i][j].getText().trim();
-                    matrizOriginal[i][j] = Double.parseDouble(texto);
-                }
+            eaMax = Double.parseDouble(txtErrorMax.getText().trim());
+            if (eaMax <= 0) {
+                JOptionPane.showMessageDialog(this,
+                    "El error maximo debe ser mayor a cero",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (eaMax > 100) {
+                JOptionPane.showMessageDialog(this,
+                    "El error maximo no puede ser mayor a 100%",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this,
-                "Error: Ingrese solo valores numericos validos",
+                "Error: Ingrese un valor numerico valido para el error maximo",
                 "Error de formato", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        double[][] matriz = solucion.copiarMatriz(matrizOriginal);
-
-        txtResultado.setText("");
-        txtResultado.append("=== SISTEMA DE ECUACIONES ===\n\n");
-        txtResultado.append(solucion.despliegaMatrizAmpliada(matrizOriginal));
-
-        double[] x;
-
-        try {
-            if (metodo.equals("Eliminacion de Gauss")) {
-                txtResultado.append("\n=== METODO: ELIMINACION DE GAUSS CON PIVOTEO ===\n\n");
-                x = solucion.eliminacionGauss(matriz);
-
-            } else {
-                txtResultado.append("\n=== METODO: GAUSS-JORDAN CON PIVOTEO ===\n\n");
-                x = solucion.gaussJordan(matriz);
+        
+        // Verificar si es diagonalmente dominante
+        if (!solucion.esDiagonalmenteDominante(matriz)) {
+            int respuesta = JOptionPane.showConfirmDialog(this,
+                "ADVERTENCIA: El sistema NO es diagonalmente dominante.\n" +
+                "El metodo de Gauss-Seidel puede NO converger.\n\n" +
+                "Desea continuar de todas formas?",
+                "Sistema no diagonalmente dominante",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE);
+            
+            if (respuesta != JOptionPane.YES_OPTION) {
+                return;
             }
-
-            txtResultado.append("Matriz despues del proceso:\n");
-            txtResultado.append(solucion.despliegaMatrizAmpliada(matriz));
-            txtResultado.append("\n" + solucion.despliegaSolucion(x));
-            txtResultado.setCaretPosition(0);
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this,
-                "Error al resolver el sistema:\n" + ex.getMessage(),
-                "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
+        // Verificar que los elementos diagonales no sean cero
+        for (int i = 0; i < n; i++) {
+            if (Math.abs(matriz[i][i]) < 1e-10) {
+                JOptionPane.showMessageDialog(this,
+                    "Error: El elemento diagonal a[" + (i+1) + "][" + (i+1) + "] es cero.\n" +
+                    "El metodo de Gauss-Seidel no puede continuar.\n" +
+                    "Reordene las ecuaciones o use otro metodo.",
+                    "Diagonal con cero", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+        
+        txtResultado.append("\n=== METODO: GAUSS-SEIDEL ===\n");
+        txtResultado.append("Error maximo permitido: " + eaMax + "%\n\n");
+        
+        SolucionEcuaciones.ResultadoGaussSeidel resultado = 
+            solucion.gaussSeidel(matriz, eaMax);
+        
+        txtResultado.append(solucion.despliegaSolucionGaussSeidel(resultado));
+        
+        if (!resultado.convergio) {
+            txtResultado.append("\n** ADVERTENCIA: El metodo no convergio **\n");
+            txtResultado.append("Se alcanzaron 1000 iteraciones sin convergencia.\n");
+            txtResultado.append("Posibles causas:\n");
+            txtResultado.append("- El sistema NO es diagonalmente dominante\n");
+            txtResultado.append("- El error maximo es muy pequeno\n");
+            txtResultado.append("Sugerencias:\n");
+            txtResultado.append("- Reordene las ecuaciones\n");
+            txtResultado.append("- Use Eliminacion de Gauss o Gauss-Jordan\n");
+        }
+        
+    } else if (metodo.equals("Eliminacion de Gauss")) {
+        txtResultado.append("\n=== METODO: ELIMINACION DE GAUSS CON PIVOTEO ===\n\n");
+        double[] x = solucion.eliminacionGauss(matriz);
+        txtResultado.append("Matriz despues del proceso:\n");
+        txtResultado.append(solucion.despliegaMatrizAmpliada(matriz));
+        txtResultado.append("\n" + solucion.despliegaSolucion(x));
+        
+    } else if (metodo.equals("Gauss-Jordan")) {
+        txtResultado.append("\n=== METODO: GAUSS-JORDAN CON PIVOTEO ===\n\n");
+        double[] x = solucion.gaussJordan(matriz);
+        txtResultado.append("Matriz despues del proceso:\n");
+        txtResultado.append(solucion.despliegaMatrizAmpliada(matriz));
+        txtResultado.append("\n" + solucion.despliegaSolucion(x));
+    }
+    
+    txtResultado.setCaretPosition(0);
+
+} catch (ArithmeticException ex) {
+    JOptionPane.showMessageDialog(this,
+        "Error matematico:\n" + ex.getMessage() + "\n\n" +
+        "El sistema puede ser:\n" +
+        "- Singular (sin solucion unica)\n" +
+        "- Incompatible (sin solucion)\n" +
+        "Verifique los coeficientes del sistema.",
+        "Error", JOptionPane.ERROR_MESSAGE);
+} catch (Exception ex) {
+    JOptionPane.showMessageDialog(this,
+        "Error inesperado al resolver el sistema:\n" + ex.getMessage(),
+        "Error", JOptionPane.ERROR_MESSAGE);
+}
+
 
     }//GEN-LAST:event_btnResolverActionPerformed
 
@@ -543,12 +640,14 @@ public class PruebaSolucionEcuacionesFrmVersion2_1 extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbMetodo;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblErrorMax;
     private javax.swing.JLabel lblMetodo;
     private javax.swing.JLabel lblTamano1;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel pnlMatriz;
     private javax.swing.JScrollPane scrollResultado;
     private javax.swing.JSpinner spnTamano;
+    private javax.swing.JTextField txtErrorMax;
     private javax.swing.JTextArea txtResultado;
     // End of variables declaration//GEN-END:variables
 }
